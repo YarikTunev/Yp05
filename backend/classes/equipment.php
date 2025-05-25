@@ -5,14 +5,13 @@ class Equipment {
     public $photo_path;
     public $inventory_number;
     public $cost;
-    public $direction;
-    public $status;
-    public $equipment_type;
-    public $model;
+    public $direction_id;
+    public $status_id;
+    public $model_id;
     public $comment;
-    public $created_at;
-    public $updated_at;
-    public $classroom_id;
+    public $room_id;
+    public $responsible_user_id;
+    public $temp_responsible_user_id;
 
     public function __construct($params)
     {
@@ -21,14 +20,13 @@ class Equipment {
         if(isset($params["photo_path"]))$this->photo_path = $params['photo_path'] ?? ' ';
         if(isset($params["inventory_number"]))$this->inventory_number = $params['inventory_number'] ?? ' ';
         if(isset($params["cost"]))$this->cost = $params['cost'] ?? ' ';
-        if(isset($params["direction"]))$this->direction = $params['direction'] ?? ' ';
-        if(isset($params["status"]))$this->status = $params['status'] ?? ' ';
-        if(isset($params["equipment_type"]))$this->equipment_type = $params['equipment_type'] ?? ' ';
-        if(isset($params["model"]))$this->model = $params['model'] ?? ' ';
+        if(isset($params["direction_id"]))$this->direction_id = $params['direction_id'] ?? ' ';
+        if(isset($params["status_id"]))$this->status_id = $params['status_id'] ?? ' ';
+        if(isset($params["model_id"]))$this->model_id = $params['model_id'] ?? ' ';
         if(isset($params["comment"]))$this->comment = $params['comment'] ?? ' ';
-        if(isset($params["created_at"]))$this->created_at = $params['created_at'] ?? ' ';
-        if(isset($params["updated_at"]))$this->updated_at = $params['updated_at'] ?? ' ';
-        if(isset($params["classroom_id"]))$this->classroom_id = $params['classroom_id'] ?? ' ';
+        if(isset($params["responsible_user_id"])) $this->responsible_user_id = $params["responsible_user_id"];
+        if(isset($params["temp_responsible_user_id"])) $this->temp_responsible_user_id = $params["temp_responsible_user_id"];
+        if(isset($params["room_id"]))$this->room_id = $params['room_id'] ?? ' ';
     }
 
     public static function Get()
@@ -75,20 +73,19 @@ class Equipment {
 
         echo json_encode($_POST);
 
-        $query = $connection->prepare("INSERT INTO `Equipment` (`name`, `photo_path`, `inventory_number`, `cost`, `direction`, `status`, `equipment_type`, `model`, `comment`, `created_at`, `updated_at`, `classroom_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param("ssiisssssssi",
+        $query = $connection->prepare("INSERT INTO `Equipment` (`name`, `photo_path`, `inventory_number`, `cost`, `direction_id`, `status_id`, `model_id`, `comment`, `room_id`, `responsible_user_id`, `temp_responsible_user_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $query->bind_param("ssiiiiisiii",
             $this->name,
             $this->photo_path,
             $this->inventory_number,
             $this->cost,
-            $this->direction,
-            $this->status,
-            $this->equipment_type,
-            $this->model,
+            $this->direction_id,
+            $this->status_id,
+            $this->model_id,
             $this->comment,
-            $this->created_at,
-            $this->updated_at,
-            $this->classroom_id
+            $this->room_id,
+            $this->responsible_user_id,
+            $this->temp_responsible_user_id
         );
 
         $success = $query->execute();
@@ -102,20 +99,19 @@ class Equipment {
     {
         $connection = Connection::connect();
 
-        $query = $connection->prepare("UPDATE `Equipment` SET `name`=?, `photo_path`=?, `inventory_number`=?, `cost`=?, `direction`=?, `status`=?, `equipment_type`=?, `model`=?, `comment`=?, `created_at`=?, `updated_at`=?, `classroom_id`=? WHERE `id`=?");
-        $query->bind_param("ssiisssssssii",
+        $query = $connection->prepare("UPDATE `Equipment` SET `name`=?, `photo_path`=?, `inventory_number`=?, `cost`=?, `direction_id`=?, `status_id`=?, `model_id`=?, `comment`=?, `room_id`=?, `responsible_user_id`=?, `temp_responsible_user_id`=? WHERE `id`=?");
+        $query->bind_param("ssiiiiisiiii",
             $this->name,
             $this->photo_path,
             $this->inventory_number,
             $this->cost,
-            $this->direction,
-            $this->status,
-            $this->equipment_type,
-            $this->model,
+            $this->direction_id,
+            $this->status_id,
+            $this->model_id,
             $this->comment,
-            $this->created_at,
-            $this->updated_at,
-            $this->classroom_id,
+            $this->room_id,
+            $this->responsible_user_id,
+            $this->temp_responsible_user_id,
             $this->id
         );
 

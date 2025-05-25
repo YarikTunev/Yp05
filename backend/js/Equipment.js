@@ -18,17 +18,18 @@ $(document).ready(function() {
                     <tr id="${equipment.id}">
                         <td>${equipment.id}</td>
                         <td>${equipment.name}</td>
-                        <td><img src=${equipment.photo_path} alt="${equipment.name}"></td>
+                        <td><img src=${equipment.photo} alt="${equipment.name}"></td>
                         <td>${equipment.inventory_number}</td>
+                        <td>${equipment.room_id}</td>
+                        <td>${equipment.responsible_user_id}</td>
+                        <td>${equipment.temp_responsible_user_id}</td>
                         <td>${equipment.cost}</td>
-                        <td>${equipment.direction}</td>
-                        <td>${equipment.status}</td>
-                        <td>${equipment.equipment_type}</td>
-                        <td>${equipment.model}</td>
+                        <td>${equipment.direction_id}</td>
+                        <td>${equipment.status_id}</td>
+                        <td>${equipment.model_id}</td>
                         <td>${equipment.comment}</td>
-                        <td>${equipment.created_at}</td>
-                        <td>${equipment.updated_at}</td>
-                        <td>${equipment.classroom_id}</td>
+                        
+                        
                         <td class=action-icons>
                             <img src=../img/edit.png alt=Edit class="edit-btn" data-id="${equipment.id}">
                             <img src=../img/delete.png alt=Delete class="delete-btn" data-id="${equipment.id}">
@@ -127,17 +128,16 @@ $(document).on("click", ".edit-btn", function () {
 
             $("#editId").val(equipment.id);
             $("#editName").val(equipment.name);
-            $("#editPhotoPath").val(equipment.photo_path);
+            $("#editPhotoPath").val(equipment.photo);
             $("#editInventoryNumber").val(equipment.inventory_number);
             $("#editCost").val(equipment.cost);
-            $("#editDirection").val(equipment.direction);
-            $("#editStatus").val(equipment.status);
-            $("#editEquipmentType").val(equipment.equipment_type);
-            $("#editModel").val(equipment.model);
+            $("#editDirection").val(equipment.direction_id);
+            $("#editStatus").val(equipment.status_id);
+            $("#editModel").val(equipment.model_id);
             $("#editComment").val(equipment.comment);
-            $("#editCreatedAt").val(equipment.created_at);
-            $("#editUpdatedAt").val(equipment.updated_at);
-            $("#editClassroomId").val(equipment.classroom_id);
+            $("#editClassroomId").val(equipment.room_id);
+            $("#editresponsible_user_id").val(equipment.responsible_user_id);
+            $("#edittemp_responsible_user_id").val(equipment.temp_responsible_user_id);
 
             $("#editEquipmentModal").show();
         },

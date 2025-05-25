@@ -53,27 +53,24 @@
                 <label for="direction">Направление:</label>
                 <select id="direction" name="direction" required>
                     <option value="">Выберете</option>
-                    <option value="Мехатроника">Мехатроника</option>
-                    <option value="Общее">Общее</option>
-                    <option value="Информатика">Информатика</option>
+                    <option value="1">Ит</option>
+                    <option value="2">Наука</option>
+                    <option value="4">Математика</option>
                 </select>
 
                 <label for="status">Статус:</label>
                 <select id="status" name="status" required>
                     <option value="">Выберете</option>
-                    <option value="На ремонте">На ремонте</option>
-                    <option value="Используется">Используется</option>
-                    <option value="На складе">На складе</option>
+                    <option value="1">В использовании</option>
+                    <option value="2">На обслуживании</option>
+                    <option value="3">Списано</option>
                 </select>
 
                 <label for="equipment_type">Тип обр.:</label>
                 <select id="equipment_type" name="equipment_type" required>
                     <option value="">Выберете</option>
-                    <option value="Ноутбук">Ноутбук</option>
-                    <option value="Проектор">Проектор</option>
-                    <option value="Принтер">Принтер</option>
-                    <option value="Компьютер">Компьютер</option>
-                    <option value="Доска">Доска</option>
+                    <option value="1">Ноутбук</option>
+                    <option value="2">Проектор</option>
                 </select>
 
                 <label for="model">Модель:</label>
@@ -115,25 +112,22 @@
 
                 <label for="editDirection">Направление:</label>
                 <select id="editDirection" name="direction" required>
-                    <option value="1">Мехатроника</option>
-                    <option value="2">Общее</option>
-                    <option value="3">Информатика</option>
+                    <option value="1">Ит</option>
+                    <option value="2">Наука</option>
+                    <option value="4">Математика</option>
                 </select>
 
                 <label for="editStatus">Статус:</label>
                 <select id="editStatus" name="status" required>
-                    <option value="Н1">На ремонте</option>
-                    <option value="2">Используется</option>
-                    <option value="3">На складе</option>
+                    <option value="1">В использовании</option>
+                    <option value="2">На обслуживании</option>
+                    <option value="3">Списано</option>
                 </select>
 
                 <label for="editEquipmentType">Тип обр.:</label>
                 <select id="editEquipmentType" name="equipment_type" required>
                     <option value="1">Ноутбук</option>
                     <option value="2">Проектор</option>
-                    <option value="3">Принтер</option>
-                    <option value="4">Компьютер</option>
-                    <option value="5">Доска</option>
                 </select>
 
                 <label for="editModel">Модель:</label>
@@ -164,15 +158,14 @@
                     <th>Наименование</th>
                     <th>Фотография</th>
                     <th>Инв. номер</th>
+                    <th>Номер аудитории</th>
+                    <th>Ответственый</th>
+                    <th>Временно-ответственый</th>
                     <th>Цена</th>
                     <th>Направление</th>
                     <th>Статус</th>
-                    <th>Тип обр.</th>
                     <th>Модель</th>
                     <th>Комментарий</th>
-                    <th>Созданно</th>
-                    <th>Обновлено</th>
-                    <th>Номер аудитории</th>
                     <th>Действие</th>
                 </tr>
             </thead>
