@@ -1,7 +1,7 @@
 <?php
     class Users{
         public $id; 
-        public $login ; 
+        public $login; 
         public $password;
         public $role;
         public $email;
@@ -95,7 +95,5 @@
 
             return $result;
         }
-        
-
     }
 ?>

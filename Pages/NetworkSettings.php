@@ -17,6 +17,7 @@
         <a href="InventoryResults.php">Результаты инвентаризации</a>
         <a href="#" style="color: #dc3545; font-weight: bold;">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
+        <a href="General.php">Общее</a>
     </div>
     <div class="user">
         <p>Admin</p>
@@ -49,11 +50,8 @@
                 <label for="gateway">Gateway:</label>
                 <input type="text" id="gateway" name="gateway" required>
 
-                <label for="dns1">DNS1:</label>
-                <input type="text" id="dns1" name="dns1">
-
-                <label for="dns2">DNS2:</label>
-                <input type="text" id="dns2" name="dns2">
+                <label for="dns_servers">dns_servers:</label>
+                <input type="text" id="dns_servers" name="dns_servers">
 
                 <button type="submit" class="btn btn-add">Добавить</button>
             </form>
@@ -77,11 +75,8 @@
                 <label for="editGateway">Gateway:</label>
                 <input type="text" id="editGateway" name="gateway" required>
 
-                <label for="editDns1">DNS1:</label>
-                <input type="text" id="editDns1" name="dns1">
-
-                <label for="editDns2">DNS2:</label>
-                <input type="text" id="editDns2" name="dns2">
+                <label for="editDns_servers">dns_servers:</label>
+                <input type="text" id="editDns_servers" name="dns_servers">
 
                 <button type="submit" class="btn btn-update">Обновить</button>
             </form>
@@ -96,8 +91,7 @@
                     <th>IP Адрес</th>
                     <th>Маска сети</th>
                     <th>Gateway</th>
-                    <th>DNS1</th>
-                    <th>DNS2</th>
+                    <th>dns_servers</th>
                     <th>Действие</th>
                 </tr>
             </thead>

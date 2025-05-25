@@ -17,6 +17,7 @@
         <a href="InventoryResults.php">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
+        <a href="General.php">Общее</a>
     </div>
     <div class="user">
         <p>Admin</p>
@@ -114,25 +115,25 @@
 
                 <label for="editDirection">Направление:</label>
                 <select id="editDirection" name="direction" required>
-                    <option value="Мехатроника">Мехатроника</option>
-                    <option value="Общее">Общее</option>
-                    <option value="Информатика">Информатика</option>
+                    <option value="1">Мехатроника</option>
+                    <option value="2">Общее</option>
+                    <option value="3">Информатика</option>
                 </select>
 
                 <label for="editStatus">Статус:</label>
                 <select id="editStatus" name="status" required>
-                    <option value="На ремонте">На ремонте</option>
-                    <option value="Используется">Используется</option>
-                    <option value="На складе">На складе</option>
+                    <option value="Н1">На ремонте</option>
+                    <option value="2">Используется</option>
+                    <option value="3">На складе</option>
                 </select>
 
                 <label for="editEquipmentType">Тип обр.:</label>
                 <select id="editEquipmentType" name="equipment_type" required>
-                    <option value="Ноутбук">Ноутбук</option>
-                    <option value="Проектор">Проектор</option>
-                    <option value="Принтер">Принтер</option>
-                    <option value="Компьютер">Компьютер</option>
-                    <option value="Доска">Доска</option>
+                    <option value="1">Ноутбук</option>
+                    <option value="2">Проектор</option>
+                    <option value="3">Принтер</option>
+                    <option value="4">Компьютер</option>
+                    <option value="5">Доска</option>
                 </select>
 
                 <label for="editModel">Модель:</label>

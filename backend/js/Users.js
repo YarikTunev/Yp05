@@ -39,6 +39,7 @@ $(document).ready(function() {
                 console.error('Error loading Users:', error);
             }
         });
+        
     }
     loadUsers();
 });

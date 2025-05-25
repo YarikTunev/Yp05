@@ -4,7 +4,7 @@
             $hostname = "localhost";
             $username = "root";
             $password = "";
-            $bdname = "study_inv";
+            $bdname = "stydu";
             $connection = mysqli_connect($hostname,  $username, $password, $bdname);
             if (!$connection) {
                 die("Ошибка подключения: " . mysqli_connect_error());

@@ -17,6 +17,7 @@
         <a href="#" style="color: #dc3545; font-weight: bold;">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
+        <a href="General.php">Общее</a>
     </div>
     <div class="user">
         <p>Admin</p>

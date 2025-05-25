@@ -20,8 +20,7 @@ $(document).ready(function() {
                         <td>${NetworkSettings.ip_address}</td>
                         <td>${NetworkSettings.subnet_mask}</td>
                         <td>${NetworkSettings.gateway}</td>
-                        <td>${NetworkSettings.dns1}</td>
-                        <td>${NetworkSettings.dns2}</td>
+                        <td>${NetworkSettings.dns_servers}</td>
                         <td class=action-icons>
                             <img src=../img/edit.png alt=Edit class="edit-btn" data-id="${NetworkSettings.id}">
                             <img src=../img/delete.png alt=Delete class="delete-btn" data-id="${NetworkSettings.id}">
@@ -118,8 +117,7 @@ $(document).on("click", ".edit-btn", function () {
             $("#editIpAddress").val(NetworkSettings.ip_address);
             $("#editSubnetMask").val(NetworkSettings.subnet_mask);
             $("#editGateway").val(NetworkSettings.gateway);
-            $("#editDns1").val(NetworkSettings.dns1);
-            $("#editDns2").val(NetworkSettings.dns2);
+            $("#editDns_servers").val(NetworkSettings.dns_servers);
 
             $("#editNetworkSettingsModal").show();
         },

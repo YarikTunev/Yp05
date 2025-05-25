@@ -5,8 +5,7 @@
     public $ip_address;
     public $subnet_mask;
     public $gateway;
-    public $dns1;
-    public $dns2;
+    public $dns_servers;
 
     public function __construct($params)
     {
@@ -15,8 +14,7 @@
         $this->ip_address = $params['ip_address'];
         $this->subnet_mask = $params['subnet_mask'] ?? ' ';
         $this->gateway = $params['gateway'] ?? ' ';
-        $this->dns1 = $params['dns1'] ?? ' ';
-        $this->dns2 = $params['dns2'] ?? ' ';
+        $this->dns_servers = $params['dns_servers'] ?? ' ';
     }
 
     public static function Get()
@@ -25,7 +23,7 @@
 
         $networkSettingsList = array();
 
-        $query = $connection->query("SELECT * FROM `NetworkSettings`");
+        $query = $connection->query("SELECT * FROM `network_settings`");
         while($read = $query->fetch_assoc()) {
             $networkSettings = new NetworkSettings($read);
             array_push($networkSettingsList, $networkSettings);
@@ -42,7 +40,7 @@
 
         $networkSettings = null;
 
-        $query = $connection->query("SELECT * FROM `NetworkSettings` WHERE `id` = {$id}");
+        $query = $connection->query("SELECT * FROM `network_settings` WHERE `id` = {$id}");
         if($query->num_rows > 0) {
             $read = $query->fetch_assoc();
             $networkSettings = new NetworkSettings($read);
@@ -57,14 +55,13 @@
     {
         $connection = Connection::connect();
 
-        $query = $connection->prepare("INSERT INTO `NetworkSettings` (`equipment_id`, `ip_address`, `subnet_mask`, `gateway`, `dns1`, `dns2`) VALUES (?, ?, ?, ?, ?, ?)");
-        $query->bind_param("isisss",
+        $query = $connection->prepare("INSERT INTO `network_settings` (`equipment_id`, `ip_address`, `subnet_mask`, `gateway`, `dns_servers`) VALUES (?, ?, ?, ?, ?)");
+        $query->bind_param("isiss",
             $this->equipment_id,
             $this->ip_address,
             $this->subnet_mask,
             $this->gateway,
-            $this->dns1,
-            $this->dns2
+            $this->dns_servers,
         );
 
         $result = $query->execute();
@@ -78,14 +75,13 @@
     {
         $connection = Connection::connect();
 
-        $query = $connection->prepare("UPDATE `NetworkSettings` SET `equipment_id`=?, `ip_address`=?, `subnet_mask`=?, `gateway`=?, `dns1`=?, `dns2`=? WHERE `id`=?");
-        $query->bind_param("isisssi",
+        $query = $connection->prepare("UPDATE `network_settings` SET `equipment_id`=?, `ip_address`=?, `subnet_mask`=?, `gateway`=?, `dns_servers`=? WHERE `id`=?");
+        $query->bind_param("isissi",
             $this->equipment_id,
             $this->ip_address,
             $this->subnet_mask,
             $this->gateway,
-            $this->dns1,
-            $this->dns2,
+            $this->dns_servers,
             $this->id
         );
 
@@ -100,7 +96,7 @@
     {
         $connection = Connection::connect();
 
-        $query = $connection->prepare("DELETE FROM `NetworkSettings` WHERE `id`=?");
+        $query = $connection->prepare("DELETE FROM `network_settings` WHERE `id`=?");
         $query->bind_param("i", $this->id);
 
         $result = $query->execute();

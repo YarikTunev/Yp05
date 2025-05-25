@@ -17,6 +17,7 @@
         <a href="InventoryResults.php">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="#" style="color: #dc3545; font-weight: bold;" >Пользователи</a>
+        <a href="General.php">Общее</a>
     </div>
     <div class="user">
         <p>Admin</p>
@@ -28,7 +29,7 @@
         <input type="text" class="search-box" placeholder="Поиск...">
         <div class="buttons">
             <button class="btn btn-import">Импортировать в SVG</button>
-            <button class="btn btn-add">Добавить запись</button>
+            <button class="btn btn-add" id="openAddModal">Добавить запись</button>
             <button class="btn btn-delete">Удалить</button>
         </div>
     </div>
