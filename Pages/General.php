@@ -11,20 +11,14 @@
 <body>
 <header>
     <div class="nav">
-        <a href="#" style="color: #dc3545; font-weight: bold;">Аудитория</a>
+        <a href="Classroom.php" style="color: #dc3545; font-weight: bold;">Аудитория</a>
         <a href="Equipment.php">Оборудование</a>
         <a href="Inventory.php">Инвентаризация</a>
         <a href="EquipmentMovie.php">Перемещение оборудования</a>
         <a href="InventoryResults.php">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
-        <a href="General.php">Общее</a>
-        <a href="Models.php">Модели</a>
-        <a href="Consumables.php">Расходники</a>
-        <a href="ConsumableTypes.php">Типы расходников</a>
-        <a href="Direction.php">Направление</a>
-        <a href="Programs.php">Программы</a>
-        <a href="Status.php">Статус</a>
+        <a href="#" style="color: #dc3545; font-weight: bold;">Общее</a>
     </div>
     <div class="user">
         <p>Admin</p>
