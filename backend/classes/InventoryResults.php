@@ -1,21 +1,23 @@
 <?php
 class InventoryResults {
     public $id;
-    public $inventory_id;
+    public $session_id;
     public $equipment_id;
+    public $user_id;
     public $checked_by;
     public $check_date;
-    public $status;
+    public $status_id;
     public $comment;
 
     public function __construct($params)
     {
         if(isset($params["id"])) $this->id = $params["id"];
-        $this->inventory_id = $params['inventory_id'] ?? ' ';
+        $this->session_id = $params['session_id'] ?? ' ';
         $this->equipment_id = $params['equipment_id'] ?? ' ';
+        $this->equipment_id = $params['user_id'] ?? ' ';
         $this->checked_by = $params['checked_by'] ?? ' ';
         $this->check_date = $params['check_date'] ?? ' ';
-        $this->status = $params['status'] ?? ' ';
+        $this->status_id = $params['status_id'] ?? ' ';
         $this->comment = $params['comment'] ?? ' ';
     }
 
@@ -61,13 +63,14 @@ class InventoryResults {
     {
         $connection = Connection::connect();
 
-        $query = $connection->prepare("INSERT INTO `InventoryResults` (`inventory_id`, `equipment_id`, `checked_by`, `check_date`, `status`, `comment`) VALUES (?, ?, ?, ?, ?, ?)");
+        $query = $connection->prepare("INSERT INTO `InventoryResults` (`inventory_id`, `equipment_id`, `user_id`, `checked_by`, `check_date`, `status`, `comment`) VALUES (?, ?, ?, ?, ?, ?)");
         $query->bind_param("iissss",
-            $this->inventory_id,
+            $this->session_id,
             $this->equipment_id,
+            $this->user_id,
             $this->checked_by,
             $this->check_date,
-            $this->status,
+            $this->status_id,
             $this->comment
         );
 
@@ -82,13 +85,14 @@ class InventoryResults {
     {
         $connection = Connection::connect();
 
-        $query = $connection->prepare("UPDATE `InventoryResults` SET `inventory_id`=?, `equipment_id`=?, `checked_by`=?, `check_date`=?, `status`=?, `comment`=? WHERE `id`=?");
+        $query = $connection->prepare("UPDATE `InventoryResults` SET `inventory_id`=?, `equipment_id`=?, `user_id`=?, `checked_by`=?, `check_date`=?, `status`=?, `comment`=? WHERE `id`=?");
         $query->bind_param("iissssi",
-            $this->inventory_id,
+            $this->session_id,
             $this->equipment_id,
+            $this->user_id,
             $this->checked_by,
             $this->check_date,
-            $this->status,
+            $this->status_id,
             $this->comment,
             $this->id
         );

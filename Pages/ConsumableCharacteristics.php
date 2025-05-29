@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
+    <link rel="stylesheet" href="../styles/pages.css">
+    <title>Характеристики расходников</title>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <a href="Classroom.php">Аудитория</a>
+        <a href="Equipment.php">Оборудование</a>
+        <a href="Inventory.php">Инвентаризация</a>
+        <a href="EquipmentMovie.php">Перемещение оборудования</a>
+        <a href="InventoryResults.php">Результаты инвентаризации</a>
+        <a href="NetworkSettings.php">Настройки сети</a>
+        <a href="Consumables.php">Расходники</a>
+        <a href="#" style="color: #dc3545; font-weight: bold;">Характеристики</a>
+        <a href="ConsumableTypes.php">Типы расходников</a>
+    </div>
+    <div class="user">
+        <p>Admin</p>
+        <img src="../img/down.png" alt="">
+    </div>
+</header>
+<main>
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Поиск...">
+        <div class="buttons">
+            <button class="btn btn-import">Импортировать в SVG</button>
+            <button class="btn btn-add">Добавить запись</button>
+            <button class="btn btn-delete">Удалить</button>
+        </div>
+    </div>
+
+    <div id="addCharModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Добавить характеристику</h2>
+            <form id="addForm">
+                <label for="consumable_id">ID расходника:</label>
+                <input type="number" id="consumable_id" name="consumable_id" required>
+
+                <label for="characteristic_name">Название характеристики:</label>
+                <input type="text" id="characteristic_name" name="characteristic_name" required>
+
+                <button type="submit" class="btn btn-add">Добавить</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editCharModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Редактировать характеристику</h2>
+            <form id="editForm">
+                <input type="hidden" id="editId" name="id">
+                <label for="editConsumableId">ID расходника:</label>
+                <input type="number" id="editConsumableId" name="consumable_id" required>
+
+                <label for="editCharacteristicName">Название характеристики:</label>
+                <input type="text" id="editCharacteristicName" name="characteristic_name" required>
+
+                <button type="submit" class="btn btn-update">Обновить</button>
+            </form>
+        </div>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID расходника</th>
+                    <th>Название характеристики</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</main>
+<script src="../backend/js/ConsumableCharacteristics.js"></script>
+</body>
+</html>

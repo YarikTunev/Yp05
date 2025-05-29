@@ -155,3 +155,170 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
         }
     });
 });
+// Функционал поиска
+const $searchBox = $('.search-box');
+const $tbody = $('tbody');
+const $table = $('table');
+let debounceId;
+
+function filterRows() {
+    const q = $searchBox.val().trim().toLowerCase();
+
+    $tbody.find('.no-results').remove();
+
+    let visibleCount = 0;
+    $tbody.find('tr').each(function() {
+        const text = $(this).text().toLowerCase();
+        if (q === '' || text.includes(q)) {
+            $(this).show();
+            visibleCount++;
+        } else {
+            $(this).hide();
+        }
+    });
+
+    // если ничего не найдено
+    if (q !== '' && visibleCount === 0) {
+        const colCount = $table.find('thead th').length;
+        const $noRow = $('<tr>').addClass('no-results');
+        $noRow.append(
+            $('<td>')
+                .attr('colspan', colCount)
+                .css({ 'text-align': 'center', 'padding': '10px', 'color': '#666' })
+                .text('Ничего не найдено')
+        );
+        $tbody.append($noRow);
+    }
+}
+
+// Запуск поиска по нажатию Enter
+$searchBox.on('keydown', function(e) {
+    if (e.key === 'Enter') {
+        clearTimeout(debounceId);
+        debounceId = setTimeout(filterRows, 300);
+    }
+});
+  // Сортировка
+    let lastSortedIndex = null;
+    let lastSortDir = 'asc';
+
+    function sortRows(index, direction) {
+        // Убираем сообщение "ничего не найдено" перед сортировкой
+        const $noResults = $tbody.find('.no-results').remove();
+
+        // Получаем все строки кроме служебных
+        const rows = $tbody.find('tr').not('.no-results').get();
+
+        rows.sort(function(a, b) {
+            let aText = $(a).children().eq(index).text().trim();
+            let bText = $(b).children().eq(index).text().trim();
+
+            // Распознаем данные
+            const aDate = Date.parse(aText);
+            const bDate = Date.parse(bText);
+            let aVal, bVal;
+
+            if (!isNaN(aDate) && !isNaN(bDate)) {
+                aVal = aDate;
+                bVal = bDate;
+            } else if (!isNaN(parseFloat(aText)) && !isNaN(parseFloat(bText))) {
+                aVal = parseFloat(aText);
+                bVal = parseFloat(bText);
+            } else {
+                aVal = aText.toLowerCase();
+                bVal = bText.toLowerCase();
+            }
+
+            if (aVal < bVal) return direction === 'asc' ? -1 : 1;
+            if (aVal > bVal) return direction === 'asc' ? 1 : -1;
+            return 0;
+        });
+
+        // Добавляем отсортированные строки обратно
+        $.each(rows, function(_, row) {
+            $tbody.append(row);
+        });
+
+        // Возвращаем сообщение "ничего не найдено", если было
+        if ($noResults.length) $tbody.append($noResults);
+    }
+
+    // Обработка клика по заголовкам
+    $table.find('thead th').each(function(index) {
+        // Добавляем иконку-сортировку
+        $(this).append('<span class="sort-icon" style="margin-left:5px; cursor:pointer;">▼</span>');
+        $(this).css('cursor', 'pointer');
+
+        $(this).on('click', function() {
+            // Определяем направление
+            let dir = 'asc';
+            if (lastSortedIndex === index && lastSortDir === 'asc') {
+                dir = 'desc';
+            }
+
+            $table.find('.sort-icon').text('▼');
+
+            // Устанавливаем иконку для текущего
+            const icon = dir === 'asc' ? '▲' : '▼';
+            $(this).find('.sort-icon').text(icon);
+
+            // Сортируем
+            sortRows(index, dir);
+
+            lastSortedIndex = index;
+            lastSortDir = dir;
+        });
+    });
+
+document.getElementById('filter').addEventListener('click', function(e) {
+ // Функционал поиска и фильтрации
+const $searchBox = $('.search-box');
+const $developerFilter = $('.developer-filter');
+const $tbody = $('tbody');
+const $filterBtn = $('#filter');
+
+function applyFilters() {
+    const searchText = $searchBox.val().trim().toLowerCase();
+    const selectedDeveloper = $developerFilter.val();
+
+    $tbody.find('.no-results').remove();
+
+    let visibleCount = 0;
+    $tbody.find('tr').each(function() {
+        if ($(this).hasClass('no-results')) return;
+        
+        const rowText = $(this).text().toLowerCase();
+        const developer = $(this).find('td:eq(3)').text().trim();
+        
+        const textMatch = searchText === '' || rowText.includes(searchText);
+        const developerMatch = selectedDeveloper === '' || developer === selectedDeveloper;
+        
+        if (textMatch && developerMatch) {
+            $(this).show();
+            visibleCount++;
+        } else {
+            $(this).hide();
+        }
+    });
+
+    if (visibleCount === 0 && (searchText !== '' || selectedDeveloper !== '')) {
+        const colCount = $('thead th').length;
+        $tbody.append(`
+            <tr class="no-results">
+                <td colspan="${colCount}" style="text-align: center; padding: 10px; color: #666;">
+                    Ничего не найдено
+                </td>
+            </tr>
+        `);
+    }
+}
+
+// Обработчики событий
+$searchBox.on('keyup', function() {
+    clearTimeout(debounceId);
+    debounceId = setTimeout(applyFilters, 300);
+});
+
+$developerFilter.on('change', applyFilters);
+$filterBtn.on('click', applyFilters);
+});

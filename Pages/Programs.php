@@ -28,6 +28,13 @@
 <main>
     <div class="search-container">
         <input type="text" class="search-box" placeholder="Поиск...">
+            <select class="developer-filter">
+                <option option value="">Все разработчики</option>
+                <option value="Microsoft">Microsoft</option>
+                <option value="Adobe">Adobe</option>
+                <option value="test2">test2</option>
+            </select>
+            <button id="filter">Поиск</button>
         <div class="buttons">
             <button class="btn btn-import">Импортировать в SVG</button>
             <button class="btn btn-add">Добавить запись</button>

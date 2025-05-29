@@ -39,10 +39,13 @@
             <h2>Добавить результат инвентаризации</h2>
             <form id="addForm">
                 <label for="inventory_id">Номер инвентаризации:</label>
-                <input type="text" id="inventory_id" name="inventory_id" required>
+                <input type="text" id="session_id" name="session_id" required>
 
                 <label for="equipment_id">Номер оборудования:</label>
                 <input type="text" id="equipment_id" name="equipment_id" required>
+
+                <label for="user_id">Пользователь:</label>
+                <input type="text" id="user_id" name="user_id" required>
 
                 <label for="checked_by">Номер проверяющего:</label>
                 <input type="text" id="checked_by" name="checked_by" required>
@@ -50,8 +53,8 @@
                 <label for="check_date">Дата проверки:</label>
                 <input type="datetime-local" id="check_date" name="check_date" required>
 
-                <label for="status">Статус:</label>
-                <select id="status" name="status" required>
+                <label for="status_id">Статус:</label>
+                <select id="status_id" name="status_id" required>
                     <option value="Используется">Используется</option>
                     <option value="На ремонте">На ремонте</option>
                 </select>
@@ -69,11 +72,14 @@
             <h2>Редактировать результат инвентаризации</h2>
             <form id="editForm">
                 <input type="hidden" id="editId" name="id">
-                <label for="editInventoryId">Номер инвентаризации:</label>
-                <input type="text" id="editInventoryId" name="inventory_id" required>
+                <label for="editSessionId">Номер инвентаризации:</label>
+                <input type="text" id="editSessionId" name="session_id" required>
 
                 <label for="editEquipmentId">Номер оборудования:</label>
                 <input type="text" id="editEquipmentId" name="equipment_id" required>
+
+                <label for="editUserId">Пользователь:</label>
+                <input type="text" id="editUser_id" name="user_id" required>
 
                 <label for="editCheckedBy">Номер проверяющего:</label>
                 <input type="text" id="editCheckedBy" name="checked_by" required>
@@ -101,6 +107,7 @@
                     <th>Id</th>
                     <th>Номер инвентаризации</th>
                     <th>Номер оборудования</th>
+                    <th>Пользователь</th>
                     <th>Номер проверяющего</th>
                     <th>Дата проверки</th>
                     <th>Статус</th>

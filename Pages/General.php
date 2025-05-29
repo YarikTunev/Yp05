@@ -19,6 +19,12 @@
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
         <a href="General.php">Общее</a>
+        <a href="Models.php">Модели</a>
+        <a href="Consumables.php">Расходники</a>
+        <a href="ConsumableTypes.php">Типы расходников</a>
+        <a href="Direction.php">Направление</a>
+        <a href="Programs.php">Программы</a>
+        <a href="Status.php">Статус</a>
     </div>
     <div class="user">
         <p>Admin</p>
@@ -29,6 +35,7 @@
     <a href="Status.php">Статусы</a>
     <a href="Direction.php">Направление</a>
     <a href="Programs.php">Программы</a>
+    <a href="import.php">Импорт оборудования (.xls)</a>
 </main>
 </body>
 </html>

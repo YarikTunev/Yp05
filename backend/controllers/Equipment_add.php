@@ -9,12 +9,12 @@ if($action == "get"){
     echo json_encode(Equipment::GetById($_POST["id"]), JSON_UNESCAPED_UNICODE);
 } else if ($action == "add") {
     $equipment = new Equipment($_POST);
-    if (isset($_FILES['photo_path']) && $_FILES['photo_path']['error'] == UPLOAD_ERR_OK) {
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == UPLOAD_ERR_OK) {
         $uploadDir = 'C:\Users\student-a502\Desktop\ospanel_2024_min_8.0\domains\localhost\Up05\backend\uploads/';
-        $uploadFile = $uploadDir . basename($_FILES['photo_path']['name']);
+        $uploadFile = $uploadDir . basename($_FILES['photo']['name']);
 
-        if (move_uploaded_file($_FILES['photo_path']['tmp_name'], $uploadFile)) {
-            $equipment->photo_path = $uploadFile;
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadFile)) {
+            $equipment->photo = $uploadFile;
         } else {
             echo json_encode(['error' => 'Failed to upload photo'], JSON_UNESCAPED_UNICODE);
             exit;

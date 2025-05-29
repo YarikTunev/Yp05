@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "connection.php";
+$db = Connection::connect();
 
 // Обработка входа
 if (isset($_POST["login"])) {

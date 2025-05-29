@@ -42,7 +42,7 @@
                 <input type="text" id="name" name="name" required>
 
                 <label for="photo_path">Фотография:</label>
-                <input type="file" id="photo_path" name="photo_path" accept="images/*">
+                <input type="file" id="photo" name="photo" accept="images/*">
 
                 <label for="inventory_number">Инв. номер:</label>
                 <input type="text" id="inventory_number" name="inventory_number" required>
@@ -74,7 +74,7 @@
                 </select>
 
                 <label for="model">Модель:</label>
-                <input type="text" id="model" name="model">
+                <input type="text" id="model_id" name="model_id">
 
                 <label for="comment">Комментарий:</label>
                 <input type="text" id="comment" name="comment">
@@ -102,7 +102,7 @@
                 <input type="text" id="editName" name="name" required>
 
                 <label for="editPhotoPath">Фотография:</label>
-                <input type="text" id="editPhotoPath" name="photo_path">
+                <input type="file" id="editPhoto" name="photo" accept="images/*">
 
                 <label for="editInventoryNumber">Инв. номер:</label>
                 <input type="text" id="editInventoryNumber" name="inventory_number" required>
@@ -111,14 +111,14 @@
                 <input type="text" id="editCost" name="cost">
 
                 <label for="editDirection">Направление:</label>
-                <select id="editDirection" name="direction" required>
+                <select id="editDirectionId" name="direction_id" required>
                     <option value="1">Ит</option>
                     <option value="2">Наука</option>
                     <option value="4">Математика</option>
                 </select>
 
                 <label for="editStatus">Статус:</label>
-                <select id="editStatus" name="status" required>
+                <select id="editStatusId" name="status_id" required>
                     <option value="1">В использовании</option>
                     <option value="2">На обслуживании</option>
                     <option value="3">Списано</option>
@@ -131,7 +131,7 @@
                 </select>
 
                 <label for="editModel">Модель:</label>
-                <input type="text" id="editModel" name="model" required>
+                <input type="text" id="editModelId" name="model_id" required>
 
                 <label for="editComment">Комментарий:</label>
                 <input type="text" id="editComment" name="comment">

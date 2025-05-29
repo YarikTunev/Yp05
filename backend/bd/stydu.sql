@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 24 2025 г., 13:34
+-- Время создания: Май 28 2025 г., 00:29
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -46,10 +46,10 @@ INSERT INTO `Classrooms` (`id`, `name`, `short_name`, `responsible_user_id`, `te
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `consumables`
+-- Структура таблицы `Consumables`
 --
 
-CREATE TABLE `consumables` (
+CREATE TABLE `Consumables` (
   `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text,
@@ -62,10 +62,10 @@ CREATE TABLE `consumables` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Дамп данных таблицы `consumables`
+-- Дамп данных таблицы `Consumables`
 --
 
-INSERT INTO `consumables` (`id`, `name`, `description`, `date_received`, `image`, `quantity`, `responsible_user_id`, `temp_responsible_user_id`, `consumable_type_id`) VALUES
+INSERT INTO `Consumables` (`id`, `name`, `description`, `date_received`, `image`, `quantity`, `responsible_user_id`, `temp_responsible_user_id`, `consumable_type_id`) VALUES
 (1, 'Бумага А4', 'Бумага для принтера', '2025-05-01', NULL, 500, 1, NULL, 1),
 (2, 'Чёрные чернила', 'Картридж с чернилами', '2025-05-02', NULL, 50, 1, NULL, 2);
 
@@ -112,25 +112,6 @@ INSERT INTO `consumable_types` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `developers`
---
-
-CREATE TABLE `developers` (
-  `id` int NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `developers`
---
-
-INSERT INTO `developers` (`id`, `name`) VALUES
-(1, 'Адоб'),
-(2, 'Майкрософт');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `directions`
 --
 
@@ -145,7 +126,8 @@ CREATE TABLE `directions` (
 
 INSERT INTO `directions` (`id`, `name`) VALUES
 (1, 'ИТ'),
-(2, 'Наука');
+(2, 'Наука'),
+(4, 'Математика');
 
 -- --------------------------------------------------------
 
@@ -158,7 +140,7 @@ CREATE TABLE `equipment` (
   `name` varchar(255) NOT NULL,
   `photo` longblob,
   `inventory_number` varchar(50) NOT NULL,
-  `room_id` int DEFAULT NULL,
+  `classroom_id` int DEFAULT NULL,
   `responsible_user_id` int DEFAULT NULL,
   `temp_responsible_user_id` int DEFAULT NULL,
   `cost` decimal(12,2) DEFAULT NULL,
@@ -172,7 +154,7 @@ CREATE TABLE `equipment` (
 -- Дамп данных таблицы `equipment`
 --
 
-INSERT INTO `equipment` (`id`, `name`, `photo`, `inventory_number`, `room_id`, `responsible_user_id`, `temp_responsible_user_id`, `cost`, `direction_id`, `status_id`, `model_id`, `comment`) VALUES
+INSERT INTO `equipment` (`id`, `name`, `photo`, `inventory_number`, `classroom_id`, `responsible_user_id`, `temp_responsible_user_id`, `cost`, `direction_id`, `status_id`, `model_id`, `comment`) VALUES
 (1, 'Проектор A', NULL, '001', 2, 3, NULL, '1200.00', 2, 1, 2, 'Установлен в физической лаборатории'),
 (2, 'Ноутбук A', NULL, '002', 1, 2, NULL, '1500.00', 1, 1, 1, 'Закреплён за преподавателем Петровым');
 
@@ -416,6 +398,7 @@ CREATE TABLE `inventoryResults` (
   `user_id` int DEFAULT NULL,
   `checked_by` int DEFAULT NULL,
   `check_date` datetime DEFAULT NULL,
+  `status_id` int DEFAULT NULL,
   `comment` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -423,9 +406,9 @@ CREATE TABLE `inventoryResults` (
 -- Дамп данных таблицы `inventoryResults`
 --
 
-INSERT INTO `inventoryResults` (`id`, `session_id`, `equipment_id`, `user_id`, `checked_by`, `check_date`, `comment`) VALUES
-(1, 1, 1, 2, 2, '2025-05-23 14:41:28', 'Проверено, всё в порядке'),
-(2, 1, 2, 3, 2, '2025-05-23 14:41:28', 'Проверено, всё в порядке');
+INSERT INTO `inventoryResults` (`id`, `session_id`, `equipment_id`, `user_id`, `checked_by`, `check_date`, `status_id`, `comment`) VALUES
+(1, 1, 1, 2, 2, '2025-05-23 14:41:28', 1, 'Проверено, всё в порядке'),
+(2, 1, 2, 3, 2, '2025-05-23 14:41:28', 1, 'Проверено, всё в порядке');
 
 --
 -- Триггеры `inventoryResults`
@@ -492,7 +475,7 @@ CREATE TABLE `network_settings` (
 
 INSERT INTO `network_settings` (`id`, `equipment_id`, `ip_address`, `subnet_mask`, `gateway`, `dns_servers`) VALUES
 (1, 2, '192.168.1.10', '255.255.255.0', '192.168.1.1', '8.8.8.8'),
-(2, 1, '192.168.1.11', '255.255.255.0', '192.168.1.1', '8.8.4.4');
+(2, 1, '192.168.1.11', '255', '192.168.1.1', '');
 
 -- --------------------------------------------------------
 
@@ -504,16 +487,17 @@ CREATE TABLE `programs` (
   `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `version` varchar(100) DEFAULT NULL,
-  `developer_id` int NOT NULL
+  `developer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `programs`
 --
 
-INSERT INTO `programs` (`id`, `name`, `version`, `developer_id`) VALUES
-(1, 'Microsoft Word', '2019', 2),
-(2, 'Adobe Acrobat', '2020', 1);
+INSERT INTO `programs` (`id`, `name`, `version`, `developer`) VALUES
+(1, 'Microsoft Word', '2019', 'Microsoft'),
+(2, 'Adobe Acrobat', '2020', 'Adobe'),
+(4, 'test2', 'tes', 'test2');
 
 -- --------------------------------------------------------
 
@@ -533,7 +517,9 @@ CREATE TABLE `statuses` (
 INSERT INTO `statuses` (`id`, `name`) VALUES
 (1, 'В использовании'),
 (2, 'На обслуживании'),
-(3, 'Списано');
+(3, 'Списано'),
+(4, 'Починка'),
+(5, 'Сломанно');
 
 -- --------------------------------------------------------
 
@@ -544,7 +530,7 @@ INSERT INTO `statuses` (`id`, `name`) VALUES
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `login` varchar(100) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `role` enum('administrator','teacher','staff') NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `last_name` varchar(100) NOT NULL,
@@ -558,7 +544,7 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `password_hash`, `role`, `email`, `last_name`, `first_name`, `middle_name`, `phone`, `address`) VALUES
+INSERT INTO `users` (`id`, `login`, `password`, `role`, `email`, `last_name`, `first_name`, `middle_name`, `phone`, `address`) VALUES
 (1, 'admin', 'pbkdf2:sha256:150000$abc$def', 'administrator', 'admin@example.com', 'Иванов', 'Иван', 'Иванович', '+70000000000', '123 Main St'),
 (2, 'teacher1', 'pbkdf2:sha256:150000$ghi$jkl', 'teacher', 'teacher1@example.com', 'Петров', 'Пётр', 'Петрович', '+70000000001', '124 Main St'),
 (3, 'staff1', 'pbkdf2:sha256:150000$mno$pqr', 'staff', 'staff1@example.com', 'Сидоров', 'Сидор', 'Сидорович', '+70000000002', '125 Main St');
@@ -578,9 +564,9 @@ ALTER TABLE `Classrooms`
   ADD KEY `idx_rooms_short_name` (`short_name`);
 
 --
--- Индексы таблицы `consumables`
+-- Индексы таблицы `Consumables`
 --
-ALTER TABLE `consumables`
+ALTER TABLE `Consumables`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_consumables_responsible_user` (`responsible_user_id`),
   ADD KEY `fk_consumables_temp_responsible_user` (`temp_responsible_user_id`),
@@ -603,18 +589,10 @@ ALTER TABLE `consumable_types`
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Индексы таблицы `developers`
---
-ALTER TABLE `developers`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
-
---
 -- Индексы таблицы `directions`
 --
 ALTER TABLE `directions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `equipment`
@@ -622,7 +600,7 @@ ALTER TABLE `directions`
 ALTER TABLE `equipment`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `inventory_number` (`inventory_number`),
-  ADD KEY `fk_equipment_room` (`room_id`),
+  ADD KEY `fk_equipment_room` (`classroom_id`),
   ADD KEY `fk_equipment_responsible_user` (`responsible_user_id`),
   ADD KEY `fk_equipment_temp_responsible_user` (`temp_responsible_user_id`),
   ADD KEY `fk_equipment_direction` (`direction_id`),
@@ -682,7 +660,8 @@ ALTER TABLE `inventoryResults`
   ADD KEY `fk_invrec_equipment` (`equipment_id`),
   ADD KEY `fk_invrec_user` (`user_id`),
   ADD KEY `idx_invrec_session_equipment` (`session_id`,`equipment_id`),
-  ADD KEY `fk_inventoryresults_checked_by` (`checked_by`);
+  ADD KEY `fk_inventoryresults_checked_by` (`checked_by`),
+  ADD KEY `fk_inventoryresults_status` (`status_id`);
 
 --
 -- Индексы таблицы `models`
@@ -703,16 +682,13 @@ ALTER TABLE `network_settings`
 -- Индексы таблицы `programs`
 --
 ALTER TABLE `programs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_programs_developer` (`developer_id`),
-  ADD KEY `idx_programs_name_version` (`name`,`version`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `statuses`
 --
 ALTER TABLE `statuses`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `users`
@@ -733,9 +709,9 @@ ALTER TABLE `Classrooms`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT для таблицы `consumables`
+-- AUTO_INCREMENT для таблицы `Consumables`
 --
-ALTER TABLE `consumables`
+ALTER TABLE `Consumables`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -751,16 +727,10 @@ ALTER TABLE `consumable_types`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT для таблицы `developers`
---
-ALTER TABLE `developers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT для таблицы `directions`
 --
 ALTER TABLE `directions`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `equipment`
@@ -814,13 +784,13 @@ ALTER TABLE `network_settings`
 -- AUTO_INCREMENT для таблицы `programs`
 --
 ALTER TABLE `programs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -840,9 +810,9 @@ ALTER TABLE `Classrooms`
   ADD CONSTRAINT `fk_rooms_temp_responsible_user` FOREIGN KEY (`temp_responsible_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
--- Ограничения внешнего ключа таблицы `consumables`
+-- Ограничения внешнего ключа таблицы `Consumables`
 --
-ALTER TABLE `consumables`
+ALTER TABLE `Consumables`
   ADD CONSTRAINT `fk_consumables_responsible_user` FOREIGN KEY (`responsible_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_consumables_temp_responsible_user` FOREIGN KEY (`temp_responsible_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_consumables_type` FOREIGN KEY (`consumable_type_id`) REFERENCES `consumable_types` (`id`) ON DELETE SET NULL;
@@ -851,7 +821,7 @@ ALTER TABLE `consumables`
 -- Ограничения внешнего ключа таблицы `consumable_characteristics`
 --
 ALTER TABLE `consumable_characteristics`
-  ADD CONSTRAINT `fk_conschar_consumable` FOREIGN KEY (`consumable_id`) REFERENCES `consumables` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_conschar_consumable` FOREIGN KEY (`consumable_id`) REFERENCES `Consumables` (`id`) ON DELETE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `equipment`
@@ -860,7 +830,7 @@ ALTER TABLE `equipment`
   ADD CONSTRAINT `fk_equipment_direction` FOREIGN KEY (`direction_id`) REFERENCES `directions` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_equipment_model` FOREIGN KEY (`model_id`) REFERENCES `models` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_equipment_responsible_user` FOREIGN KEY (`responsible_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_equipment_room` FOREIGN KEY (`room_id`) REFERENCES `Classrooms` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_equipment_room` FOREIGN KEY (`classroom_id`) REFERENCES `Classrooms` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_equipment_status` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_equipment_temp_responsible_user` FOREIGN KEY (`temp_responsible_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
@@ -877,7 +847,7 @@ ALTER TABLE `EquipmentMovementHistory`
 -- Ограничения внешнего ключа таблицы `equipment_consumables`
 --
 ALTER TABLE `equipment_consumables`
-  ADD CONSTRAINT `fk_equipcons_consumable` FOREIGN KEY (`consumable_id`) REFERENCES `consumables` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_equipcons_consumable` FOREIGN KEY (`consumable_id`) REFERENCES `Consumables` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_equipcons_equipment` FOREIGN KEY (`equipment_id`) REFERENCES `equipment` (`id`) ON DELETE CASCADE;
 
 --
@@ -898,6 +868,7 @@ ALTER TABLE `Inventory`
 --
 ALTER TABLE `inventoryResults`
   ADD CONSTRAINT `fk_inventoryresults_checked_by` FOREIGN KEY (`checked_by`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_inventoryresults_status` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_invrec_equipment` FOREIGN KEY (`equipment_id`) REFERENCES `equipment` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_invrec_session` FOREIGN KEY (`session_id`) REFERENCES `Inventory` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_invrec_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
@@ -913,12 +884,6 @@ ALTER TABLE `models`
 --
 ALTER TABLE `network_settings`
   ADD CONSTRAINT `fk_netsettings_equipment` FOREIGN KEY (`equipment_id`) REFERENCES `equipment` (`id`) ON DELETE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `programs`
---
-ALTER TABLE `programs`
-  ADD CONSTRAINT `fk_programs_developer` FOREIGN KEY (`developer_id`) REFERENCES `developers` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
