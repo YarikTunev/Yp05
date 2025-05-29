@@ -9,9 +9,9 @@ class Classroom {
     public function __construct($params) {
         if(isset($params["id"])) $this->id = $params["id"];
         if(isset($params["name"])) $this->name = $params["name"];
-        if(isset($params["short_name"])) $this->short_name = $params["short_name"];
-        if(isset($params["responsible_user_id"])) $this->responsible_user_id = $params["responsible_user_id"];
-        if(isset($params["temp_responsible_user_id"])) $this->temp_responsible_user_id = $params["temp_responsible_user_id"];
+        if(isset($params["short_name"])) $this->short_name = $params["short_name"] ?? ' ';
+        if(isset($params["responsible_user_id"])) $this->responsible_user_id = $params["responsible_user_id"] ?? ' ';
+        if(isset($params["temp_responsible_user_id"])) $this->temp_responsible_user_id = $params["temp_responsible_user_id"] ?? ' ';
     }
 
     public static function Get() {

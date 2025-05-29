@@ -1,11 +1,3 @@
-<?
-session_start();
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'administrator') {
-    header("Location: ../index.php");
-    exit;
-}
-$userLogin = $_SESSION['user']['login'];
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -18,6 +10,7 @@ $userLogin = $_SESSION['user']['login'];
 <body>
 <header>
     <div class="nav">
+        <a href="General.php">Общее</a>
         <a href="Classroom.php">Аудитория</a>
         <a href="Equipment.php">Оборудование</a>
         <a href="Inventory.php">Инвентаризация</a>
@@ -26,10 +19,17 @@ $userLogin = $_SESSION['user']['login'];
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
         <a href="General.php">Общее</a>
+        <a href="Models.php">Модели</a>
+        <a href="Consumables.php" style="color: #dc3545; font-weight: bold;">Расходники</a>
+        <a href="ConsumableTypes.php">Типы расходников</a>
+        <a href="Direction.php">Направление</a>
+        <a href="Programs.php">Программы</a>
+        <a href="Status.php">Статус</a>
+        <a href="ConsumableCharacteristics.php">Характеристики расходников</a>
     </div>
     <div class="user">
-        <p><?= htmlspecialchars($userLogin) ?></p>
-        <a href="../logout.php">Выйти</a>
+        <p>Admin</p>
+        <img src="../img/down.png" alt="">
     </div>
 </header>
 <main>
@@ -61,6 +61,9 @@ $userLogin = $_SESSION['user']['login'];
 
                 <label for="quantity">Количество:</label>
                 <input type="number" id="quantity" name="quantity" required>
+
+                <label for="cost">Цена:</label>
+                <input type="number" id="cost" name="cost" required>
 
                 <label for="responsible_user_id">ID ответственного:</label>
                 <input type="number" id="responsible_user_id" name="responsible_user_id">
@@ -97,6 +100,9 @@ $userLogin = $_SESSION['user']['login'];
                 <label for="editQuantity">Количество:</label>
                 <input type="number" id="editQuantity" name="quantity" required>
 
+                <label for="editCost">Цена:</label>
+                <input type="number" id="editCost" name="cost" required>
+
                 <label for="editResponsibleUserId">ID ответственного:</label>
                 <input type="number" id="editResponsibleUserId" name="responsible_user_id">
 
@@ -118,7 +124,9 @@ $userLogin = $_SESSION['user']['login'];
                     <th>Название</th>
                     <th>Описание</th>
                     <th>Дата получения</th>
+                    <th>Изображение</th>
                     <th>Количество</th>
+                    <th>Цена</th>
                     <th>ID ответственного</th>
                     <th>ID временного ответственного</th>
                     <th>ID типа расходника</th>

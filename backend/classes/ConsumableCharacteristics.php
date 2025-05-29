@@ -7,7 +7,7 @@ class ConsumableCharacteristics {
     public function __construct($p) {
         if(isset($p['id'])) $this->id = $p['id'];
         if(isset($p['consumable_id'])) $this->consumable_id = $p['consumable_id'];
-        if(isset($p['value'])) $this->characteristic_name = $p['characteristic_name'];
+        if(isset($p['characteristic_name'])) $this->characteristic_name = $p['characteristic_name'];
     }
 
     public static function Get() {
@@ -37,8 +37,8 @@ class ConsumableCharacteristics {
 
     public function Add() {
         $c = Connection::connect();
-        $stmt = $c->prepare("INSERT INTO `consumable_characteristics` (name, value, consumable_id) VALUES (?, ?, ?)");
-        $stmt->bind_param("ssi", $this->characteristic_name, $this->consumable_id);
+        $stmt = $c->prepare("INSERT INTO `consumable_characteristics` (characteristic_name, consumable_id) VALUES (?, ?)");
+        $stmt->bind_param("si", $this->characteristic_name, $this->consumable_id);
         $r = $stmt->execute();
         Connection::close($c);
         return $r;
@@ -46,8 +46,8 @@ class ConsumableCharacteristics {
 
     public function Update() {
         $c = Connection::connect();
-        $stmt = $c->prepare("UPDATE `consumable_characteristics` SET name = ?, value = ?, consumable_id = ? WHERE id = ?");
-        $stmt->bind_param("ssii", $this->characteristic_name, $this->consumable_id, $this->id);
+        $stmt = $c->prepare("UPDATE `consumable_characteristics` SET characteristic_name = ?, consumable_id = ? WHERE id = ?");
+        $stmt->bind_param("sii", $this->characteristic_name, $this->consumable_id, $this->id);
         $r = $stmt->execute();
         Connection::close($c);
         return $r;

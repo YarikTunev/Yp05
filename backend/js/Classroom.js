@@ -52,7 +52,7 @@ $(".btn-add").click(function () {
     formData.append("action", "add");
 
     $.ajax({
-        url: '../../backend/controllers/Classroom_add.php',
+        url: '../backend/controllers/Classroom_add.php',
         type: 'POST',
         data: formData,
         cache: false,

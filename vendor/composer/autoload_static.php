@@ -42,8 +42,13 @@ class ComposerStaticInitd3bdfa42bf116c3808b005988de4d60a
         ),
         'Psr\\Http\\Message\\' => 
         array (
+<<<<<<< HEAD
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+=======
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
+>>>>>>> 71d417de8d5a5e046bf8e7cc9ea2c63c95bbf399
         ),
         'Psr\\Http\\Client\\' => 
         array (

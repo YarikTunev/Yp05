@@ -1,11 +1,4 @@
-<?
-session_start();
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'administrator') {
-    header("Location: ../index.php");
-    exit;
-}
-$userLogin = $_SESSION['user']['login'];
-?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -18,19 +11,24 @@ $userLogin = $_SESSION['user']['login'];
 <body>
 <header>
     <div class="nav">
+        <a href="General.php">Общее</a>
         <a href="Classroom.php">Аудитория</a>
-        <a href="#" style="color: #dc3545; font-weight: bold;">Оборудование</a>
+        <a href="Equipment.php" style="color: #dc3545; font-weight: bold;">Оборудование</a>
         <a href="Inventory.php">Инвентаризация</a>
         <a href="EquipmentMovie.php">Перемещение оборудования</a>
         <a href="InventoryResults.php">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
         <a href="General.php">Общее</a>
+        <a href="Models.php">Модели</a>
+        <a href="Consumables.php">Расходники</a>
+        <a href="ConsumableTypes.php">Типы расходников</a>
+        <a href="Direction.php">Направление</a>
+        <a href="Programs.php">Программы</a>
+        <a href="Status.php">Статус</a>
+        <a href="ConsumableCharacteristics.php">Характеристики расходников</a>
     </div>
-    <div class="user">
-        <p><?= htmlspecialchars($userLogin) ?></p>
-        <a href="../logout.php">Выйти</a>
-    </div>
+
 </header>
 <main>
     <div class="search-container">
@@ -49,52 +47,45 @@ $userLogin = $_SESSION['user']['login'];
                 <label for="name">Наименование:</label>
                 <input type="text" id="name" name="name" required>
 
-                <label for="photo_path">Фотография:</label>
+                <label for="photo">Фотография:</label>
                 <input type="file" id="photo" name="photo" accept="images/*">
 
                 <label for="inventory_number">Инв. номер:</label>
-                <input type="text" id="inventory_number" name="inventory_number" required>
+                <input type="number" id="inventory_number" name="inventory_number" required>
 
                 <label for="cost">Цена:</label>
-                <input type="text" id="cost" name="cost">
+                <input type="number" id="cost" name="cost">
 
-                <label for="direction">Направление:</label>
-                <select id="direction" name="direction" required>
+                <label for="direction_id">Направление:</label>
+                <select id="direction_id" name="direction_id" required>
                     <option value="">Выберете</option>
                     <option value="1">Ит</option>
                     <option value="2">Наука</option>
                     <option value="4">Математика</option>
                 </select>
 
-                <label for="status">Статус:</label>
-                <select id="status" name="status" required>
+                <label for="status_id">Статус:</label>
+                <select id="status" name="status_id" required>
                     <option value="">Выберете</option>
                     <option value="1">В использовании</option>
                     <option value="2">На обслуживании</option>
                     <option value="3">Списано</option>
                 </select>
+                
+                <label for="responsible_user_id">Ответственый:</label>
+                <input type="number" id="responsible_user_id" name="responsible_user_id">
 
-                <label for="equipment_type">Тип обр.:</label>
-                <select id="equipment_type" name="equipment_type" required>
-                    <option value="">Выберете</option>
-                    <option value="1">Ноутбук</option>
-                    <option value="2">Проектор</option>
-                </select>
+                <label for="temp_responsible_user_id">Временно-ответственный:</label>
+                <input type="number" id="temp_responsible_user_id" name="temp_responsible_user_id">
 
-                <label for="model">Модель:</label>
-                <input type="text" id="model_id" name="model_id">
+                <label for="model_id">Модель:</label>
+                <input type="number" id="model_id" name="model_id">
 
                 <label for="comment">Комментарий:</label>
                 <input type="text" id="comment" name="comment">
 
-                <label for="created_at">Созданно:</label>
-                <input type="datetime-local" step="1" id="created_at" name="created_at">
-
-                <label for="updated_at">Обновлено:</label>
-                <input type="datetime-local" step="1" id="updated_at" name="updated_at">
-
                 <label for="classroom_id">Номер аудитории:</label>
-                <input type="text" id="classroom_id" name="classroom_id">
+                <input type="number" id="classroom_id" name="classroom_id">
 
                 <button type="submit" class="btn btn-add">Добавить</button>
             </form>
@@ -106,52 +97,48 @@ $userLogin = $_SESSION['user']['login'];
             <h2>Редактировать оборудование</h2>
             <form id="editForm">
                 <input type="hidden" id="editId" name="id">
-                <label for="editName">Наименование:</label>
+                <<label for="editName">Наименование:</label>
                 <input type="text" id="editName" name="name" required>
 
-                <label for="editPhotoPath">Фотография:</label>
+                <label for="editPhoto">Фотография:</label>
                 <input type="file" id="editPhoto" name="photo" accept="images/*">
 
-                <label for="editInventoryNumber">Инв. номер:</label>
-                <input type="text" id="editInventoryNumber" name="inventory_number" required>
+                <label for="editInventory_number">Инв. номер:</label>
+                <input type="number" id="editInventory_number" name="inventory_number" required>
 
                 <label for="editCost">Цена:</label>
-                <input type="text" id="editCost" name="cost">
+                <input type="number" id="editCost" name="cost">
 
-                <label for="editDirection">Направление:</label>
-                <select id="editDirectionId" name="direction_id" required>
+                <label for="editDirection_id">Направление:</label>
+                <select id="editDirection_id" name="direction_id" required>
+                    <option value="">Выберете</option>
                     <option value="1">Ит</option>
                     <option value="2">Наука</option>
                     <option value="4">Математика</option>
                 </select>
 
-                <label for="editStatus">Статус:</label>
-                <select id="editStatusId" name="status_id" required>
+                <label for="editStatus_id">Статус:</label>
+                <select id="editStatus_id" name="status_id" required>
+                    <option value="">Выберете</option>
                     <option value="1">В использовании</option>
                     <option value="2">На обслуживании</option>
                     <option value="3">Списано</option>
                 </select>
+                
+                <label for="editResponsible_user_id">Ответственый:</label>
+                <input type="number" id="editResponsible_user_id" name="responsible_user_id">
 
-                <label for="editEquipmentType">Тип обр.:</label>
-                <select id="editEquipmentType" name="equipment_type" required>
-                    <option value="1">Ноутбук</option>
-                    <option value="2">Проектор</option>
-                </select>
+                <label for="editTemp_responsible_user_id">Вресенно-ответственный:</label>
+                <input type="number" id="editTemp_responsible_user_id" name="temp_responsible_user_id">
 
-                <label for="editModel">Модель:</label>
-                <input type="text" id="editModelId" name="model_id" required>
+                <label for="editModel_id">Модель:</label>
+                <input type="number" id="editModel_id" name="model_id">
 
                 <label for="editComment">Комментарий:</label>
                 <input type="text" id="editComment" name="comment">
 
-                <label for="editCreatedAt">Созданно:</label>
-                <input type="datetime-local" step="1" id="editCreatedAt" name="created_at">
-
-                <label for="editUpdatedAt">Обновлено:</label>
-                <input type="datetime-local" step="1" id="editUpdatedAt" name="updated_at">
-
-                <label for="editClassroomId">Номер аудитории:</label>
-                <input type="text" id="editClassroomId" name="classroom_id">
+                <label for="editClassroom_id">Номер аудитории:</label>
+                <input type="number" id="editClassroom_id" name="classroom_id">
 
                 <button type="submit" class="btn btn-update">Обновить</button>
             </form>

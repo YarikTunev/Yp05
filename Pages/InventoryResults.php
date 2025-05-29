@@ -1,11 +1,4 @@
-<?
-session_start();
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'administrator') {
-    header("Location: ../index.php");
-    exit;
-}
-$userLogin = $_SESSION['user']['login'];
-?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -18,18 +11,22 @@ $userLogin = $_SESSION['user']['login'];
 <body>
 <header>
     <div class="nav">
+        <a href="General.php">Общее</a>
         <a href="Classroom.php">Аудитория</a>
         <a href="Equipment.php">Оборудование</a>
         <a href="Inventory.php">Инвентаризация</a>
         <a href="EquipmentMovie.php">Перемещение оборудования</a>
-        <a href="#" style="color: #dc3545; font-weight: bold;">Результаты инвентаризации</a>
+        <a href="InventoryResults.php" style="color: #dc3545; font-weight: bold;">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
         <a href="General.php">Общее</a>
-    </div>
-    <div class="user">
-        <p><?= htmlspecialchars($userLogin) ?></p>
-        <a href="../logout.php">Выйти</a>
+        <a href="Models.php">Модели</a>
+        <a href="Consumables.php">Расходники</a>
+        <a href="ConsumableTypes.php">Типы расходников</a>
+        <a href="Direction.php">Направление</a>
+        <a href="Programs.php">Программы</a>
+        <a href="Status.php">Статус</a>
+        <a href="ConsumableCharacteristics.php">Характеристики расходников</a>
     </div>
 </header>
 <main>
@@ -59,12 +56,15 @@ $userLogin = $_SESSION['user']['login'];
                 <input type="text" id="checked_by" name="checked_by" required>
 
                 <label for="check_date">Дата проверки:</label>
-                <input type="datetime-local" id="check_date" name="check_date" required>
+                <input type="datetime-local" step="1"  id="check_date" name="check_date" required>
 
                 <label for="status_id">Статус:</label>
                 <select id="status_id" name="status_id" required>
-                    <option value="Используется">Используется</option>
-                    <option value="На ремонте">На ремонте</option>
+                    <option value="1">В использовании</option>
+                    <option value="2">На обслуживании</option>
+                    <option value="3">Списано</option>
+                    <option value="4">Починка</option>
+                    <option value="5">Сломанно</option>
                 </select>
 
                 <label for="comment">Комментарий:</label>
@@ -87,7 +87,7 @@ $userLogin = $_SESSION['user']['login'];
                 <input type="text" id="editEquipmentId" name="equipment_id" required>
 
                 <label for="editUserId">Пользователь:</label>
-                <input type="text" id="editUser_id" name="user_id" required>
+                <input type="text" id="editUserId" name="user_id" required>
 
                 <label for="editCheckedBy">Номер проверяющего:</label>
                 <input type="text" id="editCheckedBy" name="checked_by" required>
@@ -95,10 +95,13 @@ $userLogin = $_SESSION['user']['login'];
                 <label for="editCheckDate">Дата проверки:</label>
                 <input type="datetime" id="editCheckDate" name="check_date" required>
 
-                <label for="editStatus">Статус:</label>
-                <select id="editStatus" name="status" required>
-                    <option value="Используется">Используется</option>
-                    <option value="На ремонте">На ремонте</option>
+                <label for="editStatusId">Статус:</label>
+                <select id="editStatusId" name="status" required>
+                    <option value="1">В использовании</option>
+                    <option value="2">На обслуживании</option>
+                    <option value="3">Списано</option>
+                    <option value="4">Починка</option>
+                    <option value="5">Сломанно</option>
                 </select>
 
                 <label for="editComment">Комментарий:</label>

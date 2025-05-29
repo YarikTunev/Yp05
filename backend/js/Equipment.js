@@ -152,14 +152,14 @@ $(document).on("click", ".edit-btn", function () {
             $("#editId").val(equipment.id);
             $("#editName").val(equipment.name);
             $("#editPhoto").val(equipment.photo);
-            $("#editInventoryNumber").val(equipment.inventory_number);
-            $("#editClassroomId").val(equipment.classroom_id);
-            $("#editresponsible_user_id").val(equipment.responsible_user_id);
-            $("#edittemp_responsible_user_id").val(equipment.temp_responsible_user_id);
+            $("#editInventory_number").val(equipment.inventory_number);
+            $("#editClassroom_id").val(equipment.classroom_id);
+            $("#editResponsible_user_id").val(equipment.responsible_user_id);
+            $("#editTemp_responsible_user_id").val(equipment.temp_responsible_user_id);
             $("#editCost").val(equipment.cost);
-            $("#editDirection").val(equipment.direction_id);
-            $("#editStatus").val(equipment.status_id);
-            $("#editModel").val(equipment.model_id);
+            $("#editDirection_id").val(equipment.direction_id);
+            $("#editStatus_id").val(equipment.status_id);
+            $("#editModel_id").val(equipment.model_id);
             $("#editComment").val(equipment.comment);
             $("#editEquipmentModal").show();
         },
@@ -312,4 +312,4 @@ $searchBox.on('keydown', function(e) {
             lastSortedIndex = index;
             lastSortDir = dir;
         });
-    });;
+    });

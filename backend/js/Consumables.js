@@ -21,6 +21,7 @@ $(document).ready(function() {
                             <td>${consumable.date_received}</td>
                             <td>${consumable.image}</td>
                             <td>${consumable.quantity}</td>
+                            <td>${consumable.cost}</td>
                             <td>${consumable.responsible_user_id}</td>
                             <td>${consumable.temp_responsible_user_id}</td>
                             <td>${consumable.consumable_type_id}</td>
@@ -128,6 +129,7 @@ $(document).ready(function() {
                 $('#editDateReceived').val(consumable.date_received);
                 $('#editimage').val(consumable.image);
                 $('#editQuantity').val(consumable.quantity);
+                $('#editCost').val(consumable.cost);
                 $('#editResponsibleUserId').val(consumable.responsible_user_id);
                 $('#editTempResponsibleUserId').val(consumable.temp_responsible_user_id);
                 $('#editConsumableTypeId').val(consumable.consumable_type_id);

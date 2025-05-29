@@ -27,7 +27,7 @@ $(function(){
         e.preventDefault();
         $.post('../backend/controllers/ConsumableCharacteristics_add.php',
             $(this).serialize()+'&action=add',
-           ()=>{ $('.modal').hide(); loadChars(); }
+            ()=>{ $('.modal').hide(); loadChars(); }
         );
     });
 
@@ -38,72 +38,31 @@ $(function(){
     });
 
     $(document).on('click','.edit-btn',function(){
-        let id = $(this).data('id');
-        $.post('../backend/controllers/ConsumableCharacteristics_add.php', {action:'getById', id}, function(d){
-            let o = JSON.parse(d);
-            $('#consumable_id').val(o.consumable_id);
-            $('#characteristic_name').val(o.characteristic_name);
-            $('#addForm').append(`<input type="hidden" name="id" value="${o.id}">`);
-            $('#addForm').off('submit').submit(function(ev){
-                ev.preventDefault();
-                $.post('../backend/controllers/ConsumableCharacteristics_add.php', $(this).serialize()+'&action=update', ()=>{ $('.modal').hide(); loadChars(); });
-            });
-            $('#addCharModal').show();
-        });
-    });
-});$(function(){
-    function loadChars(){
-        $.post('../backend/controllers/ConsumableCharacteristics_add.php',{action:'get'},function(data){
-            let arr = JSON.parse(data);
-            $('tbody').empty();
-            arr.forEach(i=>{
-                $('tbody').append(`
-                    <tr id=${i.id}>
-                        <td>${i.id}</td>
-                        <td>${i.consumable_id}</td>
-                        <td>${i.characteristic_name}</td>
-                        <td>
-                            <img src="../img/edit.png" class="edit-btn" data-id="${i.id}">
-                            <img src="../img/delete.png" class="delete-btn" data-id="${i.id}">
-                        </td>
-                    </tr>
-                `);
+    let id = $(this).data('id');
+    $.post('../backend/controllers/ConsumableCharacteristics_add.php', {action:'getById', id}, function(d){
+        let o = JSON.parse(d); // исправлено: data -> d
+
+        $('#consumable_id').val(o.consumable_id);
+        $('#characteristic_name').val(o.characteristic_name);
+
+        // Удаляем старый скрытый инпут id, если есть
+        $('#addForm input[name="id"]').remove();
+
+        // Добавляем новый
+        $('#addForm').append(`<input type="hidden" name="id" value="${o.id}">`);
+
+        // Отвязываем старый submit и привязываем новый
+        $('#addForm').off('submit').on('submit', function(ev){
+            ev.preventDefault();
+            $.post('../backend/controllers/ConsumableCharacteristics_add.php', $(this).serialize()+'&action=update', function() {
+                $('.modal').hide();
+                loadChars();
             });
         });
-    }
-    loadChars();
 
-    $('.btn-add').click(()=>$('#addCharModal').show());
-    $('.close').click(()=>$('.modal').hide());
-
-    $('#addForm').submit(function(e){
-        e.preventDefault();
-        $.post('../backend/controllers/ConsumableCharacteristics_add.php',
-            $(this).serialize()+'&action=add',
-           ()=>{ $('.modal').hide(); loadChars(); }
-        );
+        $('#addCharModal').show();
     });
-
-    $(document).on('click','.delete-btn',function(){
-        if(confirm('Удалить?')){
-            $.post('../backend/controllers/ConsumableCharacteristics_add.php', {action:'delete', id:$(this).data('id')}, loadChars);
-        }
-    });
-
-    $(document).on('click','.edit-btn',function(){
-        let id = $(this).data('id');
-        $.post('../backend/controllers/ConsumableCharacteristics_add.php', {action:'getById', id}, function(d){
-            let o = JSON.parse(d);
-            $('#consumable_id').val(o.consumable_id);
-            $('#characteristic_name').val(o.characteristic_name);
-            $('#addForm').append(`<input type="hidden" name="id" value="${o.id}">`);
-            $('#addForm').off('submit').submit(function(ev){
-                ev.preventDefault();
-                $.post('../backend/controllers/ConsumableCharacteristics_add.php', $(this).serialize()+'&action=update', ()=>{ $('.modal').hide(); loadChars(); });
-            });
-            $('#addCharModal').show();
-        });
-    });
+});
 });
 // Функционал поиска
 const $searchBox = $('.search-box');

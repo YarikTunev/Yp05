@@ -9,8 +9,8 @@
         {
             if(isset($params["id"])) $this->id = $params["id"];
             if(isset($params['name']) )$this->name = $params['name'];
-            if(isset($params['version']) )$this->version = $params['version'];
-            if(isset($params['developer']) )$this->developer = $params['developer'];
+            if(isset($params['version']) )$this->version = $params['version'] ?? ' ';
+            if(isset($params['developer']) )$this->developer = $params['developer'] ?? ' ';
             
         }
         public static function Get()

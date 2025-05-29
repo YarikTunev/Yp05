@@ -2,6 +2,7 @@
 session_start();
 require_once "backend/classes/Users.php";
 require_once "connection.php";
+$db = Connection::connect();
 
 $error = '';
 

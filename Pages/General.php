@@ -1,11 +1,4 @@
-<?
-session_start();
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'administrator') {
-    header("Location: ../index.php");
-    exit;
-}
-$userLogin = $_SESSION['user']['login'];
-?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -19,25 +12,29 @@ $userLogin = $_SESSION['user']['login'];
 <body>
 <header>
     <div class="nav">
-        <a href="Classroom.php" style="color: #dc3545; font-weight: bold;">Аудитория</a>
+        <a href="General.php" style="color: #dc3545; font-weight: bold;">Общее</a>
+        <a href="Classroom.php">Аудитория</a>
         <a href="Equipment.php">Оборудование</a>
         <a href="Inventory.php">Инвентаризация</a>
         <a href="EquipmentMovie.php">Перемещение оборудования</a>
         <a href="InventoryResults.php">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
-        <a href="#" style="color: #dc3545; font-weight: bold;">Общее</a>
-    </div>
-    <div class="user">
-        <p><?= htmlspecialchars($userLogin) ?></p>
-        <a href="../logout.php">Выйти</a>
+        <a href="General.php">Общее</a>
+        <a href="Models.php">Модели</a>
+        <a href="Consumables.php">Расходники</a>
+        <a href="ConsumableTypes.php">Типы расходников</a>
+        <a href="Direction.php">Направление</a>
+        <a href="Programs.php">Программы</a>
+        <a href="Status.php">Статус</a>
+        <a href="ConsumableCharacteristics.php">Характеристики расходников</a>
     </div>
 </header>
 <main>
-    <a href="Status.php">Статусы</a>
-    <a href="Direction.php">Направление</a>
-    <a href="Programs.php">Программы</a>
-    <a href="import.php">Импорт оборудования (.xls)</a>
+    <a href="../Generate_act.php">Генерация актов приема-передачи оборудования на временное пользование </a>
+    <a href="../generate_consumables_act.php">Генерация актов приема-передачи расходных материалов </a>
+    <a href="../generate_transfer_act.php">Генерация акта приема-передачи оборудования</a>
+    <a href="../generate_transfer_act_xlsx.php">Экспорт акта приёма-передачи оборудования в XLSX</a>
 </main>
 </body>
 </html>

@@ -17,12 +17,12 @@
             if(isset($params['login']) )$this->login = $params['login'];
             if(isset($params['password']) )$this->password = $params['password'];
             if(isset($params['role']) )$this->role = $params['role'];
-            if(isset($params['email']) )$this->email = $params['email'];
-            if(isset($params['last_name']) )$this->last_name = $params['last_name'];
-            if(isset($params['first_name']) )$this->first_name = $params['first_name'];
-            if(isset($params['middle_name']) )$this->middle_name = $params['middle_name'];
-            if(isset($params['phone']) )$this->phone = $params['phone'];
-            if(isset($params['address']) )$this->address = $params['address'];
+            if(isset($params['email']) )$this->email = $params['email'] ?? ' ';
+            if(isset($params['last_name']) )$this->last_name = $params['last_name'] ?? ' ';
+            if(isset($params['first_name']) )$this->first_name = $params['first_name'] ?? ' ';
+            if(isset($params['middle_name']) )$this->middle_name = $params['middle_name'] ?? ' ';
+            if(isset($params['phone']) )$this->phone = $params['phone'] ?? ' ';
+            if(isset($params['address']) )$this->address = $params['address'] ?? ' ';
             
         }
         public static function Get()
