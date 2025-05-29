@@ -95,5 +95,20 @@
 
             return $result;
         }
+        public static function GetByLogin($login) {
+            $connection = Connection::connect();
+            $query = $connection->prepare("SELECT * FROM `Users` WHERE `login` = ?");
+            $query->bind_param("s", $login);
+            $query->execute();
+            $result = $query->get_result();
+
+            if ($result->num_rows > 0) {
+                $read = $result->fetch_assoc();
+                return new Users($read);
+            }
+
+            Connection::close($connection);
+            return null;
+        }
     }
 ?>

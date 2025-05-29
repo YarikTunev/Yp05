@@ -1,3 +1,11 @@
+<?
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'administrator') {
+    header("Location: ../index.php");
+    exit;
+}
+$userLogin = $_SESSION['user']['login'];
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -20,8 +28,8 @@
         <a href="General.php">Общее</a>
     </div>
     <div class="user">
-        <p>Admin</p>
-        <img src="../img/down.png" alt="">
+        <p><?= htmlspecialchars($userLogin) ?></p>
+        <a href="../logout.php">Выйти</a>
     </div>
 </header>
 <main>

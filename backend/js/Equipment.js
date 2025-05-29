@@ -33,6 +33,7 @@ $(document).ready(function() {
                         <td class=action-icons>
                             <img src=../img/edit.png alt=Edit class="edit-btn" data-id="${equipment.id}">
                             <img src=../img/delete.png alt=Delete class="delete-btn" data-id="${equipment.id}">
+                            <img src="../img/document.png" alt="Akt" class="document-btn" data-id="${equipment.id}" title="Сформировать акт">
                         </td>
                     </tr>`)
                 });
@@ -44,6 +45,28 @@ $(document).ready(function() {
         });
     }
     loadEquipments();
+});
+$(document).on("click", ".document-btn", function () {
+    const equipmentId = $(this).data("id");
+
+    let formData = new FormData();
+    formData.append("action", "getById"); // обязательно!
+    formData.append("id", equipmentId);
+
+    $.ajax({
+        url: '../backend/controllers/Equipment_add.php',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            window.location.href = `../backend/generate_act.php?id=${equipmentId}`;
+        },
+        error: function(xhr, status, error) {
+            alert("Ошибка при загрузке данных оборудования.");
+            console.error(error);
+        }
+    });
 });
 //Добавление оборудования
 $(".btn-add").click(function () {
@@ -289,4 +312,4 @@ $searchBox.on('keydown', function(e) {
             lastSortedIndex = index;
             lastSortDir = dir;
         });
-    });
+    });;
