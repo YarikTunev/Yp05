@@ -106,29 +106,6 @@ class Equipment {
         Connection::close($connection);
         return $success;
     }
-
-    public function Update() {
-        $connection = Connection::connect();
-        $query = $connection->prepare("UPDATE `Equipment` SET `name` = ?, `photo` = ?, `inventory_number` = ?, `classroom_id` = ?, `responsible_user_id` = ?, `temp_responsible_user_id` = ?, `cost` = ?, `direction_id` = ?, `status_id` = ?, `model_id` = ?, `comment` = ? WHERE `id` = ?");
-        $query->bind_param("ssisiiisiiii",
-            $this->name,
-            $this->photo,
-            $this->inventory_number,
-            $this->classroom_id,
-            $this->responsible_user_id,
-            $this->temp_responsible_user_id,
-            $this->cost,
-            $this->direction_id,
-            $this->status_id,
-            $this->model_id,
-            $this->comment,
-            $this->id
-        );
-        $success = $query->execute();
-        Connection::close($connection);
-        return $success;
-    }
-
     public function Delete() {
         $connection = Connection::connect();
         $query = $connection->prepare("DELETE FROM `Equipment` WHERE `id` = ?");

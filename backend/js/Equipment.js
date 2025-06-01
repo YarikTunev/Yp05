@@ -33,7 +33,6 @@ $(document).ready(function() {
                         <td class=action-icons>
                             <img src=../img/edit.png alt=Edit class="edit-btn" data-id="${equipment.id}">
                             <img src=../img/delete.png alt=Delete class="delete-btn" data-id="${equipment.id}">
-                            <img src="../img/document.png" alt="Akt" class="document-btn" data-id="${equipment.id}" title="Сформировать акт">
                         </td>
                     </tr>`)
                 });
