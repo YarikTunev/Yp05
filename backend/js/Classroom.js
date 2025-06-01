@@ -125,6 +125,7 @@ $(document).on("click", ".edit-btn", function () {
         },
         error: function(xhr, status, error) {
             console.error('Error loading classroom for edit:', error);
+            alert("Ошибка при загрузке аудитории для редактирования.");
         }
     });
 });
@@ -142,7 +143,7 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
     formData.append("action", "update");
 
     $.ajax({
-        url: '../../backend/controllers/Classroom_add.php',
+        url: '../backend/controllers/Classroom_add.php',
         type: 'POST',
         data: formData,
         cache: false,

@@ -87,7 +87,7 @@ class Equipment {
     {
         $connection = Connection::connect();
 
-        $query = $connection->prepare("UPDATE `Equipment` SET `name`=?, `photo`=?, `inventory_number`=?, `classroom_id`=?, `responsible_user_id`=?, `temp_responsible_user_id`=?, `cost`=?, `direction_id`=?, `status_id`=?, `model_id`=?, `comment`=?,WHERE `id`=?");
+        $query = $connection->prepare("UPDATE `Equipment` SET `name`=?, `photo`=?, `inventory_number`=?, `classroom_id`=?, `responsible_user_id`=?, `temp_responsible_user_id`=?, `cost`=?, `direction_id`=?, `status_id`=?, `model_id`=?, `comment`=? WHERE `id`=?");
         $query->bind_param("ssiiiiiiiisi",
             $this->name,
             $this->photo,

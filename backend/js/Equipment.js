@@ -49,7 +49,7 @@ $(document).on("click", ".document-btn", function () {
     const equipmentId = $(this).data("id");
 
     let formData = new FormData();
-    formData.append("action", "getById"); // обязательно!
+    formData.append("action", "getById");
     formData.append("id", equipmentId);
 
     $.ajax({

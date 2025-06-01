@@ -17,6 +17,7 @@
         <a href="EquipmentMovie.php">Перемещение оборудования</a>
         <a href="InventoryResults.php">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
+        <a href="Users.php">Пользователи</a>
         <a href="Models.php">Модели</a>
         <a href="Consumables.php">Расходники</a>
         <a href="ConsumableTypes.php">Типы расходников</a>

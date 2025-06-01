@@ -47,31 +47,57 @@ $(function() {
             );
         }
     });
+//Редактирование инвентаризации
+            $(document).on("click", ".edit-btn", function () {
+                const id = $(this).data("id");
+                $.ajax({
+                    url: '../backend/controllers/ConsumableTypes_add.php',
+                    type: 'POST',
+                    data: { action: "getById", id: id},
+                    success: function(data) {
+                        let t = JSON.parse(data);
 
-    // Редактирование типа
-    $(document).on('click', '.edit-btn', function() {
-        let id = $(this).data('id');
-        $.post(
-            '../backend/controllers/ConsumableTypes_add.php',
-            { action: 'getById', id: id },
-            function(res) {
-                let t = JSON.parse(res);
-                $('#editId').val(t.id);
-                $('#editName').val(t.name);
-                $('#editTypeModal').show();
-            }
-        );
-        // Перехват отправки формы редактирования
-        $('#editForm').off('submit').submit(function(ev) {
-            ev.preventDefault();
-            $.post(
-                '../backend/controllers/ConsumableTypes_add.php',
-                $(this).serialize() + '&action=update',
-                () => { $('.modal').hide(); loadTypes(); }
-            );
-        });
-    });
-});
+                        $("#editid").val(t.id);
+                        $("#editname").val(t.name);
+
+                        $("#editTypeModal").show();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error loading direction for edit:', error);
+                        alert("Ошибка при загрузке направления для редактирования.");
+                    }
+                });
+            });
+
+            $(".close, .modal").click(function (event) {
+                if (event.target === $("#editTypeModal") || $(event.target).hasClass("close")) {
+                    $("#editDirecteditTypeModalionModal").hide();
+                }
+            });
+
+            document.getElementById('editForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                formData.append("action", "update");
+
+                $.ajax({
+                    url: '../backend/controllers/ConsumableTypes_add.php',
+                    type: 'POST',
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        alert("Инвентаризация успешно обновлена!");
+                        $("#editTypeModal").hide();
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error updating direction:', error);
+                        alert("Ошибка при обновлении направления.");
+                    }
+                });
+            });
 // Функционал поиска
 const $searchBox = $('.search-box');
 const $tbody = $('tbody');
@@ -185,4 +211,4 @@ $searchBox.on('keydown', function(e) {
             lastSortedIndex = index;
             lastSortDir = dir;
         });
-    });
+})});

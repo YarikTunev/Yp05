@@ -99,7 +99,7 @@
             <h2>Редактировать оборудование</h2>
             <form id="editForm">
                 <input type="hidden" id="editId" name="id">
-                <<label for="editName">Наименование:</label>
+                <label for="editName">Наименование:</label>
                 <input type="text" id="editName" name="name" required>
 
                 <label for="editPhoto">Фотография:</label>
