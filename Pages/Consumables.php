@@ -18,7 +18,6 @@
         <a href="InventoryResults.php">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
-        <a href="General.php">Общее</a>
         <a href="Models.php">Модели</a>
         <a href="Consumables.php" style="color: #dc3545; font-weight: bold;">Расходники</a>
         <a href="ConsumableTypes.php">Типы расходников</a>

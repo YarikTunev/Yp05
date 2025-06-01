@@ -1,11 +1,4 @@
-<?
-session_start();
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'administrator') {
-    header("Location: ../index.php");
-    exit;
-}
-$userLogin = $_SESSION['user']['login'];
-?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -27,7 +20,6 @@ $userLogin = $_SESSION['user']['login'];
         <a href="InventoryResults.php">Результаты инвентаризации</a>
         <a href="NetworkSettings.php">Настройки сети</a>
         <a href="Users.php">Пользователи</a>
-        <a href="General.php">Общее</a>
         <a href="Models.php">Модели</a>
         <a href="Consumables.php">Расходники</a>
         <a href="ConsumableTypes.php">Типы расходников</a>
@@ -37,8 +29,8 @@ $userLogin = $_SESSION['user']['login'];
         <a href="ConsumableCharacteristics.php">Характеристики расходников</a>
     </div>
     <div class="user">
-        <p><?= htmlspecialchars($userLogin) ?></p>
-        <a href="../logout.php">Выйти</a>
+        <p>Admin</p>
+        <img src="../img/down.png" alt="">
     </div>
 </header>
 <main>
